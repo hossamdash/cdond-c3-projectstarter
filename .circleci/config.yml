@@ -207,7 +207,7 @@ jobs:
 
   run-migrations:
     docker:
-      - image: circleci/node:13.8.0
+      - image: sleavely/node-awscli:14.x
     steps:
       - checkout
       - attach_workspace:
@@ -216,9 +216,9 @@ jobs:
           name: Run DB migrations
           command: |
             cd backend
+            npm cache clean --force
             rm -rf node_modules package-lock.json
             npm install
-            npm cache clean --force
             npm run migrations >> migration_dump.txt
             cat migration_dump.txt
       - run:
