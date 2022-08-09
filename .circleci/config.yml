@@ -224,6 +224,7 @@ jobs:
             if grep -q "has been executed successfully." migration_dump.txt
             then
               touch ~/project/.circleci/outputs/db_migration_success
+              cat ~/project/.circleci/outputs/db_migration_success
             fi
       - persist_to_workspace:
           root: ~/
