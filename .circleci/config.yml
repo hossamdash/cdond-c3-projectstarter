@@ -221,7 +221,7 @@ jobs:
           name: Store migration result in a file.
           command: |
             cd backend
-            cat migrations_dump.txt
+            cat migration_dump.txt
             if grep -q "has been executed successfully." migration_dump.txt
             then
               touch ~/project/.circleci/outputs/db_migration_success
