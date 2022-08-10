@@ -29,7 +29,7 @@
   - name: "move files to server"
     become: true
     unarchive:
-      src: ~/project/artifact.tar.gz
+      src: ~/project/artifact.zip
       dest: ./udapeople
 
   - name: "run server"
