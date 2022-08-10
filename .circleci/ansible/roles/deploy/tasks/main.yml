@@ -10,7 +10,7 @@
 
   - name: install dependancies
     become: true
-    package:
+    apt:
       name: 
         - npm
         - unzip
