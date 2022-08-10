@@ -281,6 +281,10 @@ jobs:
       - attach_workspace:
           at: ~/
       - run:
+          name: Install dependencies
+          command: |
+            apt install ansible-core
+      - run:
           name: Deploy backend
           command: |
             cd backend
