@@ -284,7 +284,7 @@ jobs:
           name: Install dependencies
           command: |
             apt update
-            apt install ansible
+            apt install ansible -y
       - run:
           name: Deploy backend
           command: |
