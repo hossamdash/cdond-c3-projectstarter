@@ -315,8 +315,8 @@ jobs:
           command: |
             ls 
             pwd
-            export backend_url=$(tail -n 1 ~/project/.circleci/ansible/inventory.txt)
-            echo $backend_url
+            export BACKEND_IP=$(tail -n 1 ~/project/.circleci/ansible/inventory.txt)
+            echo $BACKEND_IP
             export API_URL="http://${BACKEND_IP}:3030"
             echo $API_URL
             if curl "${API_URL}/api/status" | grep "ok"
