@@ -18,9 +18,9 @@
         - gzip
       state: present
 
-  - name: "create backend directory, install pm2"
+  - name: "create backend directory"
     become: true
-    command: mkdir ./udapeople
+    command: mkdir ~/udapeople
 
   - name: "install pm2"
     become: true
@@ -30,13 +30,19 @@
     become: true
     unarchive:
       src: ~/project/artifact.zip
-      dest: ./udapeople
+      dest: ~/udapeople
+
+  - name: "debug"
+    become: true
+    command: ls;pwd
+    args:
+      chdir: ~/udapeople/dist
 
   - name: "run server"
     become: true
     command: pm2 start -f ./main.js
     args:
-      chdir: ./udapeople/dist
+      chdir: ~/udapeople/dist
     environment:
       ENVIRONMENT: production
       TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION') }}"
