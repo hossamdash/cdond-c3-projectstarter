@@ -20,9 +20,11 @@
 
   - name: "create backend directory, install pm2"
     become: true
-    command: |
-      mkdir ./udapeople
-      npm install -g pm2
+    command: mkdir ./udapeople
+
+  - name: "install pm2"
+    become: true
+    command: npm install -g pm2
 
   - name: "move files to server"
     become: true
