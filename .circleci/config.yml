@@ -317,7 +317,7 @@ jobs:
           command: |
             ls 
             pwd
-            export backend_url=$(tail --lines 1 ~/project/.circleci/ansible/inventory.txt)
+            export backend_url=$(tail -n 1 ~/project/.circleci/ansible/inventory.txt)
             echo $backend_url
             if curl "${API_URL}/api/status" | grep "ok"
             then
