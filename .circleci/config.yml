@@ -244,8 +244,6 @@ jobs:
           name: Get backend url
           command: |
             export BACKEND_IP=$(tail --lines 1 ~/project/.circleci/ansible/inventory.txt)
-            export API_URL="http://${BACKEND_IP}:030"
-            echo "API_URL = ${API_URL}"3
             echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
             cat frontend/.env
       - run:
@@ -319,6 +317,8 @@ jobs:
             pwd
             export backend_url=$(tail -n 1 ~/project/.circleci/ansible/inventory.txt)
             echo $backend_url
+            export API_URL="http://${BACKEND_IP}:3030"
+            echo $APU_URL
             if curl "${API_URL}/api/status" | grep "ok"
             then
                 return 0
