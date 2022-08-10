@@ -15,7 +15,7 @@
         - npm
         - unzip
         - tar
-        - gz
+        - gzip
       state: present
 
   - name: "create backend directory, install pm2"
