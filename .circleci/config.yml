@@ -63,7 +63,7 @@ jobs:
             npm install
             npm run build
       - save_cache:
-          paths: [backend/node_modules, backend/dist]
+          paths: [backend/node_modules]
           key: backend-build
 
   test-frontend:
@@ -262,7 +262,7 @@ jobs:
 
   deploy-backend:
     docker:
-      - image: python:3.7-alpine3.11
+      - image: sleavely/node-awscli:14.x
         environment:
           NODE_ENV: "local"
           VERSION: "1"
@@ -280,17 +280,14 @@ jobs:
           fingerprints: ["b4:c5:34:3b:13:eb:7c:22:8b:61:09:8a:51:5f:f7:21"]
       - attach_workspace:
           at: ~/
-      - restore_cache:
-          keys: [backend-build]
-      - run:
-          name: Install dependencies
-          command: |
-            apk add --update ansible rsync 
-            apk add curl
-            pip3 install awscli
       - run:
           name: Deploy backend
           command: |
+            cd backend
+            npm install
+            npm run build
+            cd ..
+            tar -C backend -czvf artifact.tar.gz .
             cat ~/project/.circleci/ansible/inventory.txt
             ansible-playbook -i ~/project/.circleci/ansible/inventory.txt ~/project/.circleci/ansible/deploy-backend.yml
       # Here's where you will add some code to rollback on failure

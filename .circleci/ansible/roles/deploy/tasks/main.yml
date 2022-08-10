@@ -10,17 +10,9 @@
       
   - name: "move files to server"
     become: true
-    synchronize:
-      src: ~/project/backend/dist
+    unarchive:
+      src: ~/project/artifact.tar.gz
       dest: ./udapeople
-      recursive: true
-
-  - name: "move node modules"
-    become: true
-    synchronize:
-      src: ~/project/backend/node_modules
-      dest: ./udapeople
-      recursive: true
 
   - name: "run server"
     become: true
