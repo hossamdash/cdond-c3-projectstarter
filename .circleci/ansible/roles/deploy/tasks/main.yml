@@ -41,7 +41,6 @@
 
 
   - name: "run server"
-    become: true
     shell: |
       cd ~/backend_app/backend/dist
       pm2 start -f ./main.js
