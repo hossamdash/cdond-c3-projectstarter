@@ -36,7 +36,7 @@
     become: true
     command: ls;pwd
     args:
-      chdir: ~/udapeople/dist
+      chdir: /home/ubuntu/udapeople/dist
 
   - name: "run server"
     become: true
