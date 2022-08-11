@@ -293,6 +293,7 @@ jobs:
             npm run build
             cd ..
             zip -r artifact.zip backend
+            pwd
             cat ~/project/.circleci/ansible/inventory.txt
             export ANSIBLE_HOST_KEY_CHECKING=False
             ansible-playbook -i ~/project/.circleci/ansible/inventory.txt ~/project/.circleci/ansible/deploy-backend.yml

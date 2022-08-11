@@ -25,7 +25,7 @@
 
   - name: "Copy compiled backend app"
     copy:
-      src: artifact.zip
+      src: ~/project/artifact.zip
       dest: "~/backend_app/artifact.zip"
 
   - name: "Unzip backend files to correct directory"
