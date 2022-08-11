@@ -18,31 +18,28 @@
         - gzip
       state: present
 
-  - name: "create backend directory"
-    become: true
-    command: mkdir ~/udapeople
+  - name: "Creates backend app directory"
+    file:
+      path: ~/backend_app
+      state: directory
 
-  - name: "install pm2"
-    become: true
-    command: npm install -g pm2
+  - name: "Copy compiled backend app"
+    copy:
+      src: artifact.zip
+      dest: "~/backend_app/artifact.zip"
 
-  - name: "move files to server"
-    become: true
-    unarchive:
-      src: ~/project/artifact.zip
-      dest: ~/udapeople
+  - name: "Unzip backend files to correct directory"
+    shell: |
+      cd ~/backend_app
+      unzip artifact.zip
+      rm -rf artifact.zip
 
-  - name: "debug"
-    become: true
-    command: ls;pwd
-    args:
-      chdir: /home/ubuntu/udapeople/dist
 
   - name: "run server"
     become: true
-    command: pm2 start -f ./main.js
-    args:
-      chdir: ~/udapeople/dist
+    shell: |
+      cd ~/backend_app/dist
+      pm2 start -f ./main.js
     environment:
       ENVIRONMENT: production
       TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION') }}"
