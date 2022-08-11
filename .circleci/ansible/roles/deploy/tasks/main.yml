@@ -35,6 +35,9 @@
       ls
       pwd
       rm -rf artifact.zip
+    register: command_output
+  - debug:
+      var: command_output.stdout_lines
 
 
   - name: "run server"
