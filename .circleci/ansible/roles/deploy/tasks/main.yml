@@ -32,6 +32,8 @@
     shell: |
       cd ~/backend_app
       unzip artifact.zip
+      ls
+      pwd
       rm -rf artifact.zip
 
 
